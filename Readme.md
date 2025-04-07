@@ -70,8 +70,7 @@ Turma do **primeiro semestre de 2025**.
 - Usar **RMarkdown** para consolidar e apresentar os conteúdos
 
 ---
-
-## 🛠️ Estrutura do documento
+git
 
 Teremos documentos oficiais na pasta Rmarkdown, onde teremos os registros em sala, com ideias, anotações, dúvidas e muito mais. Que serão feitas da seguinte maneira.
 
