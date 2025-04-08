@@ -1,5 +1,6 @@
-
-#1.1Calcular expressões
+#%% 
+## 1 Aritmética --------------------------------------
+###1.1Calcular expressões----------------------------
 
 #1
 (32/2) + 4
@@ -19,11 +20,10 @@
 1 - factorial(20)/(factorial(15)*20^5)
 1 - prod((20:16)/20)
 
-# Igual o problema dos aniversários
+### Igual o problema dos aniversários ------------------------------------------
 ## Melhor forma de fazer, pois reduzimos a dimensão dos números, porém é a mesma forma.;
 1 - exp(sum(log((16:20)/20)))
 1 - exp(sum(log(16:20)) -5*log(20))
-
 
 #8
 (exp(-2)* 2^3)/factorial(3)
@@ -38,8 +38,10 @@ exp(log(-2 +3*log(2) - sum(log(1:3))))
 #12
 log(5,80)
 
-# 2 Vetores
-## 2.1 Criar vetores com os seguintes elementos
+
+#%%
+# 2 Vetores----------------------------------------------
+### 2.1 Criar vetores com os seguintes elementos -------------------------------------------
 a <- c(12,14,16,11,12,18,15,12,15) ; a
 
 b <- c(3,7,11,15,19,23) ; b
@@ -49,34 +51,30 @@ b <- seq(from = 3,by = 4, length.out = 6) ;b
 c <- c(1,2,4,7,11,16,22,29,37,46,56,67) ; c
 c <- 1 + cumsum(0:11) ; c
 
-## 2.2 
-### Quantos valores únicos há em a) ?
+### 2.3 -------------------------------------------
+####- Quantos valores únicos há em a) ?
 unique(a)
 
+####- Quais os valores em a) maiores que 13 ?
+x <- a[a>13]
 
-### Quais os valores em a) maiores que 13 ?
-x <- a[a>13] ; x
+####- Quantos são os valores em a) maiores que 13 ?
+y <- a[a<13]
 
-### Quantos são os valores em a) maiores que 13 ?
-y <- a[a<13]; y
+####- Quantos são os valores em a) maiores que 13 ?
+prop <- length(x)/length(a)
+####- Qual o resultado em somar o vetor em b) com em c) ?
+somar <- b+c
 
-### Quantos são os valores em a) maiores que 13 ?
-prop <- length(x)/length(a) ; prop
+####- Quantos valores de a) são divisíveis por 3 ? Quais são eles?
+div3 <- a[a%%3 == 0 ]
+####- Quantas vezes ocorrem cada valor de a)
+freq <- table(a)
 
-### Qual o resultado em somar o vetor em b) com em c) ?
-b ; c
-somar <- b+c ; somar
+####- Qual o valor mais frequente em a)
+valorF <- as.numeric(names(which.max(freq)))
 
-### Quantos valores de a) são divisíveis por 3 ? Quais são eles?
-div3 <- a[a%%3 == 0 ]; div3
-
-### Quantas vezes ocorrem cada valor de a)
-freq <- table(a); freq
-
-### Qual o valor mais frequente em a)
-valorF <- as.numeric(names(which.max(freq))); valorF
-
-## 2.4 Ainda com os vetores criados no exemplo anterior, fornecer comandos que:
+### 2.4 Ainda com os vetores criados no exemplo anterior, fornecer comandos que: -----------------------
 # Criando o vetor com as letras até "D"
 alfabeto_até_c <- list(a,b,c)
 
@@ -115,13 +113,77 @@ vetor_amostrado <- sample(a, length(a), replace = TRUE); vetor_amostrado
 gerar_vetor <- function(tamanho = 5) {
   return(runif(tamanho))  # Vetor com valores aleatórios entre 0 e 1
 }
-
+# Gerando 10 vetores de tamanho 5
 gerar_vetor
 vetores <- replicate(10,gerar_vetor()) ; vetores
 medias <- apply(vetores, 2, mean); medias
 media_total <- mean(medias) ; media_total
 
 
+
+#%%
+## 3 Estruturas de controle de fluxo----------------------
+### 3.1 Aplicação financeira--------------------------------
+aporte <- 1000
+juros <- 0.03 
+tempo <- 24
+tempo_contribuicao <- 1
+
+## Em X tempo quanto rende o investimento
+calc_portempo <- function(aporte, tempo, juros){
+      for (i in 1:tempo) {
+      aporte <- aporte * (1 + juros)
+    } 
+    return(aporte)}
+
+## Quero chegar até um target quantos meses eu obtenho esse ganho
+
+calc_tempcontrib <- function(aporte, juros, final){
+  tempo_contribuicao <- 1
+  while(aporte <= final ){
+  aporte <- aporte + (aporte * juros)
+  tempo_contribuicao <- tempo_contribuicao + 1}
+  return(tempo_contribuicao)}
+
+
+### Curiosidades e complementos ---------------------------------
+
+bag_investiment <- function(aporte_usuario, tipo, final = NA, tempo = NA){
+  if(tipo == 'CDI'){
+    juro_escolhido <- ((1 + 0.1065)^(1/12) - 1)
+  }
+  else if(tipo == 'Poupança'){
+    juro_escolhido <- 0.005
+  }
+  else {
+     juro_escolhido <- (1 + 0.10)^(1/12) - 1
+  }
+  if(!is.na(final)){
+    return(calc_tempcontrib(aporte_usuario,juro_escolhido,final = final))
+  }
+  if(!is.na(tempo)){
+  return(calc_portempo(aporte_usuario, tempo, juro_escolhido))
+}
+  else{
+    return('Você deverá informar o valor final ou o tempo de contribuição')
+  }
+}
+
+escolha_investimento <- bag_investiment(2000,'CDI',final =46865.06 ) ; escolha_investimento
+
+### Validação do teste
+valor <- 2000
+juros <- ((1 + 0.1065)^(1/12) - 1)
+
+for (i in 1:376) {
+  valor <- valor * (1 + juros)
+  cat("Mês", i, "- Valor:", valor, "\n")
+}
+
+
+### 3.2 Fibonacci--------------------------------------
+
+# Sequencia de fibonacci
 fibo <- function(x){
   i <- 0 
   num <- 0
@@ -136,7 +198,5 @@ fibo <- function(x){
   return(num2)
   cat(i)
 }
-
-
 fi <- fibo(4)
 fi

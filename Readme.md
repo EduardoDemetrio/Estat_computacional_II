@@ -15,6 +15,7 @@ A disciplina é ministrada pelo professor **Paulo Justiniano Ribeiro Junior**, r
 ### 📍 Turma
 
 Turma do **primeiro semestre de 2025**.
+[Site da materia] (http://leg.ufpr.br/~paulojus/CE312/index.html)
 
 ---
 

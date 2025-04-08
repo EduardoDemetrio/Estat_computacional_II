@@ -1044,7 +1044,7 @@ mean(as.numeric(notas[1, c("prova1", "prova2", "prova3")]))
 ## Antes de seguir adiante, veja o resultado de
 for(i in 1:30){
   print(notas[i, c("prova1", "prova2", "prova3")])
-  ##    Sys.sleep(2)
+    ##Sys.sleep(2)
 }
 
 notas[1, c("prova1", "prova2", "prova3")]
@@ -1054,8 +1054,8 @@ class(as.numeric(notas[1, c("prova1", "prova2", "prova3")]))
 
 ## Calcula a mÃ©dia das 3 provas (para cada aluno)
 notas$media <- 0
-nlinhas <- nrow(notas)
-provas <- c("prova1", "prova2", "prova3")
+nlinhas <- nrow(notas); nlinhas
+provas <- c("prova1", "prova2", "prova3") ; provas
 for(i in 1:nlinhas){
   notas$media[i] <- mean(as.numeric(notas[i, provas]))
 }
@@ -1065,7 +1065,7 @@ head(notas)
 notas$media <- rowMeans(notas[, provas])
 
 ## apenas comentando rapidamente
-ap <- apply(notas[, provas], 1, mean)
+ap <- apply(notas[, provas], 1, mean);ap
 all.equal(notas$media, ap)
 rm(ap)
 
@@ -1121,7 +1121,7 @@ for(i in 1:length(x)){
 }
 
 ## Modo R
-y2 <- x^2
+y2 <- x^2 ; y2
 ## Confere os resultados
 identical(y1, y2)
 
